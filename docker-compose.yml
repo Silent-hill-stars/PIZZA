@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./config/nginx/hosts:/etc/nginx/conf.d
+    - ./www:/var/www
+    - ./storage/logs/nginx:/var/log/nginx
+    links:
+      - php
+  php:
+    build: ./image/php
+    ports:
+    - "9000:9000"
+    volumes:
+    - ./www:/var/www
+    links:
+      - mysql
+  mysql:
+    image: mysql
+    ports:
+    - "3306:3306"
+    volumes:
+    - ./config/mysql:/etc/mysql
+    - ./storage/logs/mysql:/var/log/mysql
+    - ./storage/data/mysql/lib:/var/lib/mysql
+    - ./storage/data/mysql/mysql-files:/var/lib/mysql-files
+    - ./storage/data/mysql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: pizza
+      MYSQL_DATABASE: pizza
