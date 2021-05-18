@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ShopCategoriesOptions extends Migration
+class CreateShopProductOfferDescriptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class ShopCategoriesOptions extends Migration
      */
     public function up()
     {
-        Schema::create('shop_categories_options', function (Blueprint $table) {
+        Schema::create('shop_product_offer_description', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug');
-            $table->string('name');
+            $table->text('descriptions')->nullable()->default(null);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class ShopCategoriesOptions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shop_categories_options');
+        Schema::dropIfExists('shop_product_offer_description');
     }
 }
