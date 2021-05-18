@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ShopProducts extends Migration
+class CreateShopProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,6 +16,7 @@ class ShopProducts extends Migration
         Schema::create('shop_products', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('category_id')->index();
+            $table->unsignedInteger('options_category_id')->nullable()->default(null)->index();
             $table->string('slug');
             $table->string('name');
             $table->timestamps();

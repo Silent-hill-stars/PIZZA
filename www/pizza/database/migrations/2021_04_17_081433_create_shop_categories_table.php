@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ShopCategories extends Migration
+class CreateShopCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -35,9 +35,6 @@ class ShopCategories extends Migration
      */
     public function down()
     {
-        Schema::table('shop_categories', function (Blueprint $table) {
-            $table->dropForeign('categories_parent_id_fk');
-            $table->drop();
-        });
+        Schema::dropIfExists('shop_categories');
     }
 }
